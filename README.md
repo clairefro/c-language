@@ -46,7 +46,32 @@ assembly: c-asm.c
 	riscv64-unknown-elf-gcc -O0 -ggdb -nostdlib -march=rv32i -mabi=ilp32 -Wl,-Tm. c-asm.c -S
     
 clean:
-	rm -rf *.out *.bin *.elf 
+	rm -rf *.out *.bin *.elf
+
+```
+
+
+## m.s
+```
+_start:
+    li sp, 0x80002000
+    jal claire
+j .
+```
+
+## m.ld
+```
+MEMORY
+{
+    RAM : ORIGIN = 0x80000000, LENGTH = 4k
+}
+
+SECTIONS
+{
+.text : {
+    *(.text*)
+  } > RAM
+}
 ```
 
 ### RISC-V Reference Card
